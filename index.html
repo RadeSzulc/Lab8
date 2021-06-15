@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <script src='scripts.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+</head>
+<body>
+    <div id=pierwszy>
+        cz
+        <script>
+        jQuery('#pierwszy')
+        .css({ background: 'green' })
+        .delay(2000)
+        .slideUp()
+        .delay(1000)
+        .fadeIn(1000);
+
+        </script>
+    </div>
+
+    <div id=testAnim>
+        hej
+        <script>
+        $("#testAnim").on('mouseover', function(){
+            $(this).animate({
+                width: "500px",
+                opacity: 0.4,
+                fontSize: "3em",
+                borderWidth: "10px"
+            }, 1500);
+        });
+        </script>
+    </div>
+
+    <div id=testAnim6>
+        test
+        <script>$("#testAnim6").on({ 'mouseover' : function() { 
+                $(this).stop().animate({
+                    width:300}, 500); }, 'mouseout' : function() { 
+                        $(this).stop().animate({width:200}, 500); } }); 
+            </script>
+    </div>
+
+    <div id=zad4>
+        
+
+<ul class="user-list">
+    </ul>
+</div>
+
+<ul class="menu-context">
+    <li><div id="m1"><a href="index.html" id="ala">Odśwież stronę</a></div></li>
+    <li><div id="m2"><button class="test-ajax" type="button">Aktywuj skrypt</button></div></li>
+    <li><div id="m3"><a href="">Element menu 3</a></div></li>
+    <li><div id="m4"><a href="">Element menu 4</a></div></li>
+    <li><div id="m5"><a href="">Element menu 5</a></div></li>
+</ul>
+
+<script>
+    $("#m1").on('mouseover', function(){
+        $(this).animate({
+            width: "200px",
+            opacity: 0.4,
+            fontSize: "3em",
+            borderWidth: "10px"
+        }, 1500);
+    });
+    </script>
+
+<script>
+    $("#m2").on('mouseover', function(){
+        $(this).animate({
+            width: "200px",
+            opacity: 0.4,
+            fontSize: "3em",
+            borderWidth: "10px"
+        }, 1500);
+    });
+    </script>
+
+<script>
+    $("#m3").on('mouseover', function(){
+        $(this).animate({
+            width: "200px",
+            opacity: 0.4,
+            fontSize: "3em",
+            borderWidth: "10px"
+        }, 1500);
+    });
+    </script>
+
+<script>
+    $("#m4").on('mouseover', function(){
+        $(this).animate({
+            width: "200px",
+            opacity: 0.4,
+            fontSize: "3em",
+            borderWidth: "10px"
+        }, 1500);
+    });
+    </script>
+
+<script>
+    $("#m5").on('mouseover', function(){
+        $(this).animate({
+            width: "200px",
+            opacity: 0.4,
+            fontSize: "3em",
+            borderWidth: "10px"
+        }, 1500);
+    });
+    </script>
+
+<div id="right">
+    
+    Kliknij tu
+
+</div>
+
+<script type="text/javascript">
+const menu = document.querySelector('.menu-context');
+
+
+function removeMenu() {
+menu.style.left = '-9999px';
+menu.style.top = '-9999px';
+}
+
+function rightButton(e) {
+e.preventDefault();
+
+if (e.button === 0) {
+    menu.style.left = e.pageX + 5 + 'px';
+    menu.style.top = e.pageY + 5 + 'px';
+}
+}
+
+const block = document.querySelector('#right');
+block.addEventListener('mousedown', rightButton);
+
+</script> 
+    
+<script type="text/javascript">
+    const apiUrl = "https://jsonplaceholder.typicode.com";
+    const $list = $('.user-list');
+
+    $('.test-ajax').on('click', function() {
+    const $btn = $(this);
+
+
+
+    //wykonujemy połączenie
+    $.ajax({
+        url : apiUrl + '/users',
+        dataType : 'json'
+    })
+    .done((res) => {
+        //czyścimy listę przed dodaniem użytkowników
+        //inaczej ponowne kliknięcie duplikowało by użytkowników na liście
+        $list.empty();
+
+        //robimy pętlę po zwróconej tablicy
+        //dołączając do listy kolejne LI z imieniem i emailem użytkownika
+        res.forEach(el => {
+            $list.append(`<li>${el.address.geo.lat}; ${el.address.geo.lng}</li>`);
+        })
+    })
+    .always(() => {
+        //po zakończeniu wczytywania wyłączamy loading
+        //i włączamy przycisk
+        $btn.removeClass('loading');
+        $btn.prop('disabled', false);
+    });
+});
+</script>
+
+    
+
+
+</body>
+</html>
